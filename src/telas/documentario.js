@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import * as Linking from 'expo-linking';
+import Video from 'react-native-video';
+
+export default function App() {
+  const videoUrl = 'https://res.cloudinary.com/dib0twra5/video/upload/v1722215248/Tim%20Maia%20dados/Tim_Maia_Trailer_Oficial_HD_kazbpj.mp4';
+
+  function linkingYoutube() {
+    Linking.openURL('https://marcus-almeida.wistia.com/medias/0wwi20xjkr');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Video
+        source={{ uri: videoUrl }}
+        controls={true}
+        isMuted={false}
+        resizeMode="cover"
+        shouldPlay
+        style={styles.video}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>Tim Maia</Text>
+        <Text style={styles.description}>
+        "Tim Maia" (2014) é um filme biográfico que narra a vida do cantor brasileiro Tim Maia, baseado no livro "Vale Tudo - O Som e a Fúria de Tim Maia" de Nelson Motta. O filme segue sua trajetória desde a infância pobre no Rio de Janeiro, sua descoberta da soul music nos Estados Unidos, até o sucesso e as batalhas com drogas e alcoolismo. Destaca seus grandes sucessos, relacionamentos tumultuados e sua personalidade intensa, oferecendo um olhar profundo sobre a vida e carreira de uma das maiores lendas da música brasileira.
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={linkingYoutube}>
+          <Text style={styles.buttonText}>ACESSAR FILME COMPLETO</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    padding: 20,
+  },
+  video: {
+    width: '100%',
+    height: 200,
+  },
+  textContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  title: {
+    color: 'white',
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  description: {
+    color: 'white',
+    textAlign: 'justify',
+    fontSize: 16,
+    paddingHorizontal: 10,
+  },
+  button: {
+    borderRadius: 10,
+    borderColor: 'white',
+    borderWidth: 1,
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
+
