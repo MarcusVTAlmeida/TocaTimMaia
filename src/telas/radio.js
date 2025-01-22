@@ -1,93 +1,123 @@
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { Audio } from 'expo-av';
+import Sound from 'react-native-sound'; // Importando a biblioteca react-native-sound
+import axios from 'axios';
+import base64 from 'base-64';
+import { SocialIcon, Icon } from 'react-native-elements';
 import Admob from '../../admob';
+
+const cloudName = 'dib0twra5'; // Substitua com seu cloud_name do Cloudinary
+const apiKey = '472745782282797'; // Substitua com sua api_key do Cloudinary
+const apiSecret = 'lAPoqRdg0lsTVKUAbWnBEdUtyi0'; // Substitua com seu api_secret do Cloudinary
 
 export default function App() {
   const [Loaded, SetLoaded] = useState(false);
   const [Loading, SetLoading] = useState(false);
   const [Playing, SetPlaying] = useState(false);
   const [IsPressed, SetIsPressed] = useState(false);
-  const sound = useRef(new Audio.Sound());
+  const [musicas, setMusicas] = useState([]);
+  const [currentMusicIndex, setCurrentMusicIndex] = useState(0); // Índice da música atual
 
-  const PlayAudio = async () => {
-    SetIsPressed(true);
+  const sound = useRef(null);
+
+  useEffect(() => {
+    fetchMusicas();
+  }, []);
+
+  // Função para buscar as músicas da pasta do Cloudinary
+  const fetchMusicas = async () => {
     try {
-      const result = await sound.current.getStatusAsync();
-      if (result.isLoaded) {
-        if (!result.isPlaying) {
-          await sound.current.playAsync();
-          SetPlaying(true);
+      const response = await axios.get(
+        `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=cazuza musicas&type=upload`,
+        {
+          headers: {
+            'Authorization': `Basic ${base64.encode(`${apiKey}:${apiSecret}`)}`,
+          },
         }
-      }
+      );
+      setMusicas(response.data.resources); // Apenas as músicas da pasta 'cazuza' serão retornadas
     } catch (error) {
+      console.error('Erro ao buscar músicas:', error);
+    }
+  };
+
+  // Função para formatar o nome do arquivo
+  const formatFileName = (fileName) => {
+    const baseName = fileName.substring(0, fileName.lastIndexOf('_'));
+    return baseName
+      .replace(/_/g, ' ')
+      .toLowerCase()
+      .replace(/\b\w/g, c => c.toUpperCase());
+  };
+
+  // Função para tocar uma música
+  const playMusic = (url) => {
+    SetIsPressed(true);
+    if (sound.current) {
+      sound.current.stop(() => {
+        sound.current.release();
+      });
+    }
+
+    sound.current = new Sound(url, null, (error) => {
+      if (error) {
+        console.log('Erro ao carregar a música', error);
+        return;
+      }
+
+      sound.current.play(() => {
+        setNextMusic(); // Toca a próxima música após terminar
+      });
+    });
+
+    SetPlaying(true);
+    SetIsPressed(false);
+  };
+
+  // Função para selecionar aleatoriamente a próxima música
+  const setNextMusic = () => {
+    const nextIndex = Math.floor(Math.random() * musicas.length); // Escolhe uma música aleatória
+    setCurrentMusicIndex(nextIndex);
+    playMusic(musicas[nextIndex].secure_url);
+  };
+
+  // Função para pausar a música
+  const PauseAudio = () => {
+    SetIsPressed(true);
+    if (sound.current) {
+      sound.current.pause();
       SetPlaying(false);
     }
     SetIsPressed(false);
   };
 
-  const PauseAudio = async () => {
-    SetIsPressed(true);
-    try {
-      const result = await sound.current.getStatusAsync();
-      if (result.isLoaded) {
-        if (result.isPlaying) {
-          await sound.current.pauseAsync();
-          SetPlaying(false);
-        }
-      }
-    } catch (error) {
-      SetPlaying(true);
-    }
-    SetIsPressed(false);
-  };
-
-  const LoadAudio = async () => {
+  // Função para carregar e tocar a primeira música aleatória
+  const LoadAudio = () => {
     SetLoading(true);
-    const checkLoading = await sound.current.getStatusAsync();
-    if (!checkLoading.isLoaded) {
-      try {
-        const result = await sound.current.loadAsync(
-          { uri: 'https://stream.zeno.fm/6x7g9kxqb0hvv' },
-          {},
-          true
-        );
-        if (!result.isLoaded) {
-          SetLoading(false);
-          SetLoaded(false);
-        } else {
-          SetLoading(false);
-          SetLoaded(true);
-          PlayAudio(); // Toca o áudio automaticamente após carregar
-        }
-      } catch (error) {
-        SetLoading(false);
-        SetLoaded(false);
-      }
-    } else {
-      SetLoading(false);
-      SetLoaded(true);
+    if (musicas.length > 0) {
+      const randomIndex = Math.floor(Math.random() * musicas.length); // Seleciona aleatoriamente a primeira música
+      setCurrentMusicIndex(randomIndex); // Atualiza o índice da música atual
+      playMusic(musicas[randomIndex].secure_url); // Toca a música aleatória inicial
     }
+    SetLoading(false);
+    SetLoaded(true);
   };
 
+  // Chama LoadAudio quando as músicas estiverem carregadas
   useEffect(() => {
-    LoadAudio();
-    return () => {
-      sound.current.unloadAsync();
-    };
-  }, []);
+    if (musicas.length > 0) {
+      LoadAudio(); // Toca uma música aleatória quando as músicas estiverem carregadas
+    }
+  }, [musicas]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.coverContainer}>
           <Image
-            source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721707222/Tim%20Maia%20dados/UnrulyMixedCranefly-mobile_lfqpvy_vuwsaq.gif' }}
+            source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400114/Cazuza%20Dados/cazuza-rollingstonebr_fqfxa4.gif' }}
             style={styles.cover}
-            onLoadStart={() => console.log('GIF carregando...')}
-            onLoad={() => console.log('GIF carregado!')}
-            onError={() => console.log('Erro ao carregar o GIF')}
+            resizeMode="contain"
           />
         </View>
         <View style={styles.textContainer}>
@@ -97,14 +127,17 @@ export default function App() {
         <View style={styles.controlsContainer}>
           <TouchableOpacity
             style={styles.playButtonContainer}
-            onPress={Playing ? PauseAudio : PlayAudio}
+            onPress={Playing ? PauseAudio : LoadAudio}
             disabled={IsPressed}
-          >
-            <FontAwesome5
-              name={Playing ? 'pause' : 'play'}
-              size={75}
-              color="#3D425C"
-            />
+          >           
+             <Icon
+                          name={Playing ? 'pause' : 'play'}
+                          type='font-awesome'
+                          reverse
+                          raised
+                          color="#3D425C"
+                          size={60}
+                        />
           </TouchableOpacity>
         </View>
       </View>
@@ -124,7 +157,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Alinha o conteúdo no topo da tela
     padding: 20,
   },
   textLight: {
@@ -137,9 +170,11 @@ const styles = StyleSheet.create({
     color: "white"
   },
   coverContainer: {
-    marginTop: 32,
-    width: 350,
-    height: 350,
+    width: 300, // Aumenta a largura da imagem
+    height: 300, // Aumenta a altura da imagem
+    marginTop: 0, // Faz o GIF começar no topo
+    borderRadius: 150, // Torna a imagem circular
+    overflow: 'hidden', // Garante que a imagem será cortada para ser circular
     shadowColor: "#5D3F6A",
     shadowOffset: { height: 15 },
     shadowRadius: 8,
@@ -148,9 +183,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cover: {
-    width: 350,
-    height: 350,
-    borderRadius: 175
+    width: 400, // Aumenta a largura da imagem circular
+    height: 300, // Aumenta a altura da imagem circular
   },
   textContainer: {
     alignItems: "center",

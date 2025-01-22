@@ -22,7 +22,7 @@ const App = () => {
   const fetchAlbums = async (cursor = null) => {
     setLoading(true);
     try {
-      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Tim Maia/`;
+      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Cazuza/`;
       if (cursor) {
         url += `&next_cursor=${cursor}`;
       }
@@ -50,9 +50,6 @@ const App = () => {
       } else {
         setNextCursor(null);
       }
-
-      console.log('Álbuns:', newAlbums);
-      console.log('Próximo cursor:', response.data.next_cursor);
 
     } catch (error) {
       console.error('Erro ao buscar álbuns:', error);
