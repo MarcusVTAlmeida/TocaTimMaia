@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface TocaCazuzaTests : XCTestCase
+@interface TocaTimMaiaTests : XCTestCase
 
 @end
 
-@implementation TocaCazuzaTests
+@implementation TocaTimMaiaTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

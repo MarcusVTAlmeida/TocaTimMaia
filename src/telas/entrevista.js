@@ -22,7 +22,7 @@ const App = () => {
   const fetchVideos = async (cursor = null) => {
     setLoading(true);
     try {
-      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Cazuza Dados/Cazuza Entrevistas/`;
+      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Tim Maia Dados/Entrevistas/`
       if (cursor) {
         url += `&next_cursor=${cursor}`;
       }

@@ -32,7 +32,7 @@ export default function App() {
   return (
     <View style={{ backgroundColor: 'black', flex: 1 }}>
       <Image
-    source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736540029/Cazuza%20Dados/estampa_cazuza_ouroboros_2_ysz0vj.jpg' }}
+    source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1722302549/Tim%20Maia%20dados/480eb315814d26320f552ca45b55c830_uu8eht.jpg' }}
         style={{ width: SCREEN_WIDTH, height: 400, alignSelf: 'center' }}
       />
       <Text style={{ color: 'white', textAlign: 'justify', padding: 10, alignSelf: 'center', fontSize: 20, fontFamily: 'LangarRegular' }}>

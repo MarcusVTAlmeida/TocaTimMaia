@@ -1,4 +1,4 @@
-package com.queniabr.TocaCazuza
+package com.queniabr.TocaTimMaia
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -11,7 +11,7 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "TocaCazuza"
+  override fun getMainComponentName(): String = "TocaTimMaia"
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]

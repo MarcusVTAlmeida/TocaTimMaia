@@ -1,4 +1,4 @@
-package com.queniabr.TocaCazuza
+package com.queniabr.TocaTimMaia
 
 import android.app.Application
 import com.facebook.react.PackageList

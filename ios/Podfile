@@ -26,7 +26,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'TocaCazuza' do
+target 'TocaTimMaia' do
   use_expo_modules!
   post_integrate do |installer|
     begin
@@ -48,7 +48,7 @@ target 'TocaCazuza' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'TocaCazuzaTests' do
+  target 'TocaTimMaiaTests' do
     inherit! :complete
     # Pods for testing
   end

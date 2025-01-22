@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, {useEffect, useState} from 'react';
 import {Image, SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
-import {
+import { 
   DrawerContentScrollView,
   DrawerItemList,
   createDrawerNavigator,
@@ -32,7 +32,7 @@ const CustomSidebarMenu = props => {
         <TouchableOpacity>
           <Image
             source={{
-              uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+              uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
             }}
             style={styles.sideMenuProfileIcon}
           />
@@ -61,7 +61,7 @@ function Albuns({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -78,7 +78,7 @@ function Albuns({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -95,7 +95,7 @@ function Albuns({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -125,7 +125,7 @@ function Livros({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -142,7 +142,7 @@ function Livros({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -172,7 +172,7 @@ function Entrevistas({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -189,7 +189,7 @@ function Entrevistas({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -219,7 +219,7 @@ function Documentario({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -249,7 +249,7 @@ function Home({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -279,7 +279,7 @@ function Frases({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -310,7 +310,7 @@ function Radio({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -340,7 +340,7 @@ function Social({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />
@@ -370,7 +370,7 @@ function Biografia({navigation}) {
             <TouchableOpacity>
               <Image
                 source={{
-                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400154/Cazuza%20Dados/Screenshot_1_crnuzt.png',
+                  uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721695414/Tim%20Maia%20dados/unnamed_s5jc9v.webp',
                 }}
                 style={{width: 50, height: 50, alignSelf: 'center'}}
               />

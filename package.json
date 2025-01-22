@@ -1,5 +1,5 @@
 {
-  "name": "TocaCazuza",
+  "name": "TocaTimMaia",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "axios": "^1.7.2",
+    "axios": "^1.7.2", 
     "base-64": "^1.0.0",
     "deprecated-react-native-prop-types": "^2.2.0",
     "react": "18.2.0",

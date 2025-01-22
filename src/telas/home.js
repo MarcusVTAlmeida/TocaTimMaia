@@ -46,7 +46,7 @@ export default class App extends Component {
 
   fetchAlbuns = async () => {
     try {
-      const response = await axios.get(`https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Cazuza/`, {
+      const response = await axios.get(`https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Tim Maia/`, {
         headers: {
           'Authorization': `Basic ${base64.encode(`${apiKey}:${apiSecret}`)}`,
         },
@@ -64,7 +64,7 @@ export default class App extends Component {
 
   fetchEntrevistas = async () => {
     try {
-      const response = await axios.get(`https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Cazuza Dados/Cazuza Entrevistas/`, {
+      const response = await axios.get(`https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Tim Maia Dados/Entrevistas/`, {
         headers: {
           'Authorization': `Basic ${base64.encode(`${apiKey}:${apiSecret}`)}`,
         },
@@ -102,16 +102,16 @@ export default class App extends Component {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <Image style={styles.avatar}
-                source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1736400323/Cazuza%20Dados/Cazuza-800x534-1_kwdpby.webp' }} />
-              <Text style={styles.name}>Cazuza</Text>
-              <Text style={styles.userInfo}>1958 - 1990</Text>
+                source={{ uri: 'https://res.cloudinary.com/dib0twra5/image/upload/v1721696091/Tim%20Maia%20dados/nobody-can-live-forever-tim-maia_ilustra_pkgvay.webp'}} />
+              <Text style={styles.name}>Tim Maia</Text>
+              <Text style={styles.userInfo}>1942 - 1998</Text>
             </View>
           </View>
           <View style={styles.body}>
             <TouchableOpacity onPress={() => { const { navigate } = this.props.navigation; navigate('Biografia') }}>
               <Card>
-                <Text style={{ marginBottom: 10, color: "#000000" }}>
-                Cazuza foi um dos maiores ícones da música brasileira, conhecido pela sua voz marcante, letras profundas e personalidade irreverente. Nascido em 1958, ele ganhou destaque como vocalista do grupo Barão Vermelho nos anos 80, mas foi sua carreira solo que o consolidou como uma figura única no cenário musical. Suas canções abordam temas como amor, liberdade, política e a busca pela identidade, com letras que continuam a tocar corações até hoje. A vida de Cazuza também foi marcada por sua luta contra a Aids, e sua trajetória pessoal e profissional deixou um legado eterno na música brasileira.
+              <Text style={{ marginBottom: 10, color: "#000000" }}>
+                  Tim Maia (1942-1998) foi um icônico cantor e compositor brasileiro, famoso por sua voz poderosa e mistura única de soul, funk, jazz e rock. Nascido no Rio de Janeiro, ele começou sua carreira nos anos 1960 e alcançou grande sucesso na década de 1970 com hits como "Primavera" e "Azul da Cor do Mar". Conhecido tanto por seu talento quanto por seu comportamento excêntrico, Tim Maia deixou um legado duradouro com músicas como "Gostava Tanto de Você" e "Vale Tudo", tornando-se um dos maiores nomes da música brasileira.
                 </Text>
               </Card>
             </TouchableOpacity>

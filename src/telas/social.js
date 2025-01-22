@@ -4,30 +4,29 @@ import { SocialIcon, Icon } from 'react-native-elements';
 import Admob from '../../admob';
 
 const App = () => {
-  // Funções de redirecionamento usando Linking do react-native
-  const linkingYoutube = () => {
-    Linking.openURL('https://www.youtube.com/@CazuzaOficial');
+  function linkingYoutube() {
+    Linking.openURL('https://www.youtube.com/channel/UCQm7LSEuBoLHVIjWnDctW2Q');
   };
-  const linkingFacebook = () => {
-    Linking.openURL('https://www.facebook.com/CazuzaOficial/?locale=pt_BR');
+  function linkingFacebook() {
+    Linking.openURL('https://www.facebook.com/TimMaiaOfficial');
   };
-  const linkingInstagram = () => {
-    Linking.openURL('https://www.instagram.com/cazuza.oficial');
+  function linkingInstagram() {
+    Linking.openURL('https://www.instagram.com/timmaia.oficial');
   };
-  const linkingSpotify = () => {
-    Linking.openURL('https://open.spotify.com/intl-pt/artist/1PwOU6fFbmaGkK3wkbb8fU?nd=1&dlsi=7b21fcf3b5a44c14');
+  function linkingSpotify() {
+    Linking.openURL('https://open.spotify.com/intl-pt/artist/0jOs0wnXCu1bGGP7kh5uIu?si=vYfGBUHgR16EKS6-Je6mUw');
   };
-  const linkingTwitter = () => {
-    Linking.openURL('https://twitter.com/cazuzaoficial');
+  function linkingTwitter() {
+    Linking.openURL('https://x.com/OficialTimMaia');
   };
-  const linkingEmail = () => {
-    Linking.openURL('mailto:cazuzadigital@gmail.com');
+  function linkingEmail() {
+    Linking.openURL('mailto:carmelo@timmaia.com.br');
   };
-  const linkingAmazonMusic = () => {
-    Linking.openURL('https://music.amazon.com.br/artists/B000TOMOVA/cazuza?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=BR&ref=dm_sh_mfYCmULkqx2nPCAhjw3n53GNJ');
+  function linkingAmazonMusic() {
+    Linking.openURL('https://music.amazon.com.br/artists/B000QJNPWU/tim-maia');
   };
-  const linkingWeb = () => {
-    Linking.openURL('https://music.amazon.com.br/artists/B000TOMOVA/cazuza?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=BR&ref=dm_sh_mfYCmULkqx2nPCAhjw3n53GNJ');
+  function linkingWeb() {
+    Linking.openURL('http://www.timmaia.com.br/');
   };
 
   return (
@@ -35,8 +34,10 @@ const App = () => {
       <View style={{ alignItems: 'center', alignSelf: 'center' }}></View>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.heading}>Redes sociais oficiais</Text>
-          <Text style={styles.textStyle}>TOCA CAZUZA</Text>
+        <Text style={styles.heading} >
+            Redes sociais oficiais
+          </Text>
+          <Text style={styles.textStyle}>TOCA TIM MAIA</Text>
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}></View>
           
           <View style={{ width: '100%', flexDirection: 'column' }}>

@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.queniabr.TocaCazuza"
+    namespace "com.queniabr.TocaTimMaia"
     defaultConfig {
-        applicationId "com.queniabr.TocaCazuza"
+        applicationId "com.queniabr.TocaTimMaia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

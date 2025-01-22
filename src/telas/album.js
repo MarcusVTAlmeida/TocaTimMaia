@@ -22,7 +22,7 @@ const App = () => {
   const fetchAlbums = async (cursor = null) => {
     setLoading(true);
     try {
-      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Cazuza/`;
+      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?prefix=Tim Maia/`;
       if (cursor) {
         url += `&next_cursor=${cursor}`;
       }
