@@ -69,8 +69,6 @@ const MusicaScreen = ({ route, navigation }) => {
           renderItem={renderMusica}
           keyExtractor={item => item.public_id}
         />
-        <View style={{ alignItems: 'center', alignSelf: 'center', flex: 1, bottom: 0 }}>
-        </View>
       </ScrollView>
       <Admob />
     </SafeAreaView>

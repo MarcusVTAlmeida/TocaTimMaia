@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import * as Linking from 'expo-linking';
+import { View, Text, TouchableOpacity, StyleSheet, Linking, Dimensions } from "react-native";
 import Video from 'react-native-video';
 
 export default function App() {
-  const videoUrl = 'https://res.cloudinary.com/dib0twra5/video/upload/v1722215248/Tim%20Maia%20dados/Tim_Maia_Trailer_Oficial_HD_kazbpj.mp4';
+  const videoUrl = 'https://res.cloudinary.com/dib0twra5/video/upload/v1736399890/Cazuza%20Dados/Trailer_do_filme_Cazuza_-_O_Tempo_n%C3%A3o_P%C3%A1ra_zitslu.mp4';
+  
+  const [isFullscreen, setIsFullscreen] = useState(false); // Para controle de tela cheia
+  
+  const linkingYoutube = () => {
+    Linking.openURL('https://youtu.be/OG4O7xxTOGM');
+  };
 
-  function linkingYoutube() {
-    Linking.openURL('https://marcus-almeida.wistia.com/medias/0wwi20xjkr');
+  // Função para ajustar o modo de tela cheia
+  const onEnterFullscreen = () => {
+    setIsFullscreen(true);
+  };
+
+  const onExitFullscreen = () => {
+    setIsFullscreen(false);
   };
 
   return (
@@ -16,14 +26,16 @@ export default function App() {
         source={{ uri: videoUrl }}
         controls={true}
         isMuted={false}
-        resizeMode="cover"
+        resizeMode="contain" // O vídeo deve ser ajustado ao tamanho da tela
         shouldPlay
-        style={styles.video}
+        style={[styles.video, isFullscreen && styles.fullscreenVideo]}
+        onFullscreenPlayerDidPresent={onEnterFullscreen} // Quando entra em tela cheia
+        onFullscreenPlayerDidDismiss={onExitFullscreen} // Quando sai da tela cheia
       />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Tim Maia</Text>
+        <Text style={styles.title}>Cazuza - O Tempo Não Pára</Text>
         <Text style={styles.description}>
-        "Tim Maia" (2014) é um filme biográfico que narra a vida do cantor brasileiro Tim Maia, baseado no livro "Vale Tudo - O Som e a Fúria de Tim Maia" de Nelson Motta. O filme segue sua trajetória desde a infância pobre no Rio de Janeiro, sua descoberta da soul music nos Estados Unidos, até o sucesso e as batalhas com drogas e alcoolismo. Destaca seus grandes sucessos, relacionamentos tumultuados e sua personalidade intensa, oferecendo um olhar profundo sobre a vida e carreira de uma das maiores lendas da música brasileira.
+          O filme retrata a vida polêmica e intensa do cantor e compositor Cazuza, desde quando começou a carreira, atuando na peça Para-Quedas do Coração, no Circo Voador, o sucesso com o Barão Vermelho e sua carreira solo até a descoberta de sua doença e morte precoce em 1990.
         </Text>
         <TouchableOpacity style={styles.button} onPress={linkingYoutube}>
           <Text style={styles.buttonText}>ACESSAR FILME COMPLETO</Text>
@@ -33,17 +45,23 @@ export default function App() {
   );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Garante que o vídeo fique no topo
     alignItems: 'center',
     backgroundColor: 'black',
     padding: 20,
   },
   video: {
-    width: '100%',
-    height: 200,
+    width: width, // Garante que o vídeo ocupe toda a largura da tela
+    height: 200, // Definido para 200, mas será ajustado no modo fullscreen
+  },
+  fullscreenVideo: {
+    width: width, // Ao entrar em tela cheia, o vídeo ocupa a largura total
+    height: height, // Ao entrar em tela cheia, o vídeo ocupa a altura total
   },
   textContainer: {
     marginTop: 20,
@@ -75,4 +93,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-

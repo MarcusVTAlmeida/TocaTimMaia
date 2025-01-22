@@ -16,8 +16,6 @@ const App = ({ navigation }) => {
   );
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: 'center', alignSelf: 'center' }}>
-      </View>
       <FlatList
         data={livros}
         renderItem={renderItem}

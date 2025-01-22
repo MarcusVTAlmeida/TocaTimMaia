@@ -5,7 +5,6 @@ import axios from 'axios';
 import base64 from 'base-64';
 import Admob from '../../admob'
 
-// Substitua com seu cloud_name, api_key, e api_secret do Cloudinary
 const cloudName = 'dib0twra5';
 const apiKey = '472745782282797';
 const apiSecret = 'lAPoqRdg0lsTVKUAbWnBEdUtyi0';
@@ -23,7 +22,7 @@ const App = () => {
   const fetchVideos = async (cursor = null) => {
     setLoading(true);
     try {
-      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Tim Maia Dados/Entrevistas/`;
+      let url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=Cazuza Dados/Cazuza Entrevistas/`;
       if (cursor) {
         url += `&next_cursor=${cursor}`;
       }
@@ -37,8 +36,9 @@ const App = () => {
       const newVideos = response.data.resources.map(item => ({
         public_id: item.public_id,
         secure_url: item.secure_url,
-        thumbnail_url: `https://res.cloudinary.com/${cloudName}/video/upload/${item.public_id}.jpg`, // URL da miniatura
+        thumbnail_url: `https://res.cloudinary.com/${cloudName}/video/upload/${item.public_id}.jpg`,
       }));
+
       setVideos(prevVideos => {
         const videoMap = new Map();
         [...prevVideos, ...newVideos].forEach(video => {
@@ -53,9 +53,6 @@ const App = () => {
         setNextCursor(null);
       }
 
-      console.log('Vídeos:', newVideos);
-      console.log('Próximo cursor:', response.data.next_cursor);
-
     } catch (error) {
       console.error('Erro ao buscar vídeos:', error);
     } finally {
@@ -67,13 +64,27 @@ const App = () => {
     navigation.navigate('entrevista2', { videoUrl: video.secure_url });
   };
 
+  const formatFileName = (fileName) => {
+    const baseName = fileName.substring(0, fileName.lastIndexOf('_'));
+    return baseName
+      .replace(/_/g, ' ')
+      .toLowerCase()
+      .replace(/\b\w/g, c => c.toUpperCase());
+  };
+
   const renderVideoItem = ({ item }) => {
     const videoName = item.public_id.split('/').pop();
+    const formattedName = formatFileName(videoName); 
+    
+    if (!formattedName) {
+      return null; 
+    }
+
     return (
       <View style={styles.item}>
         <TouchableOpacity onPress={() => openVideo(item)} style={{ flexDirection: 'column', alignItems: 'center' }}>
           <Image source={{ uri: item.thumbnail_url }} style={styles.thumbnail} />
-          <Text style={styles.title}>{videoName}</Text>
+          <Text style={styles.title}>{formattedName}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -99,7 +110,7 @@ const App = () => {
           ListFooterComponent={loading ? <ActivityIndicator size="small" color="#fff" /> : null}
         />
       )}
-          <Admob />
+      <Admob />
     </SafeAreaView>
   );
 };

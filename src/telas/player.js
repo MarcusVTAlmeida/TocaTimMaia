@@ -1,70 +1,84 @@
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import Slider from '@react-native-community/slider';
-import { Audio } from 'expo-av';
+import Sound from 'react-native-sound'; // Importando a biblioteca react-native-sound
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PlayerScreen = ({ route, navigation }) => {
   const { musicUrl, albumImage, formattedName } = route.params;
   const [playing, setPlaying] = useState(false);
-  const [loaded, setLoaded] = useState(false);
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
-  const sound = useRef(new Audio.Sound());
+  const sound = useRef(null);
 
   useEffect(() => {
     loadAudio();
 
     return () => {
-      sound.current.unloadAsync();
+      if (sound.current) {
+        sound.current.release(); // Libera o áudio quando o componente for desmontado
+      }
     };
   }, []);
 
-  const loadAudio = async () => {
-    try {
-      const { sound: soundObject, status } = await Audio.Sound.createAsync(
-        { uri: musicUrl },
-        { shouldPlay: true }, // Play immediately after loading
-        onPlaybackStatusUpdate
-      );
-      sound.current = soundObject;
-      setLoaded(true);
-      setDuration(status.durationMillis);
-    } catch (error) {
-      console.log('Erro ao carregar a música:', error);
+  const loadAudio = () => {
+    sound.current = new Sound(musicUrl, null, (error) => {
+      if (error) {
+        console.log('Erro ao carregar a música:', error);
+      } else {
+        setDuration(sound.current.getDuration()); // Obtém a duração da música
+        sound.current.setNumberOfLoops(-1); // Para que a música se repita
+      }
+    });
+  };
+
+  const onPlaybackStatusUpdate = () => {
+    if (sound.current) {
+      sound.current.getCurrentTime((seconds) => {
+        setPosition(seconds); // Atualiza a posição em segundos
+      });
     }
   };
 
-  const onPlaybackStatusUpdate = status => {
-    if (status.isLoaded) {
-      setPosition(status.positionMillis);
-      setPlaying(status.isPlaying);
-    }
-    if (status.didJustFinish) {
-      sound.current.replayAsync();
-    }
-  };
-
-  const handlePlayPause = async () => {
+  const handlePlayPause = () => {
+    if (!sound.current) return;
+  
     if (playing) {
-      await sound.current.pauseAsync();
+      sound.current.pause();
+      setPlaying(false);
     } else {
-      await sound.current.playAsync();
+      setPlaying(true); // Atualiza antes para refletir visualmente
+      sound.current.play((success) => {
+        if (!success) {
+          console.log('Erro ao reproduzir o áudio');
+          setPlaying(false); // Volta ao estado anterior se houver erro
+        }
+      });
     }
   };
+  
 
-  const handleSliderChange = async value => {
-    if (loaded) {
-      const seekPosition = value * duration;
-      await sound.current.setPositionAsync(seekPosition);
+  const handleSliderChange = (value) => {
+    const seekPosition = value * duration; // Calcula a nova posição proporcionalmente
+    sound.current.setCurrentTime(seekPosition); // Define a nova posição
+    setPosition(seekPosition); // Atualiza imediatamente a posição
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
+  useEffect(() => {
+    if (sound.current && playing) {
+      const interval = setInterval(() => {
+        onPlaybackStatusUpdate();
+      }, 500); // Atualiza a posição do áudio a cada 0,5 segundos
+
+      return () => clearInterval(interval);
     }
-  };
-
-  const formatTime = millis => {
-    const minutes = Math.floor(millis / 1000 / 60);
-    const seconds = Math.floor(millis / 1000) % 60;
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
+  }, [playing]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,8 +89,8 @@ const PlayerScreen = ({ route, navigation }) => {
       <View style={{ marginTop: 8, width: '100%' }}>
         <Slider
           style={styles.slider}
-          value={position / duration}
-          onValueChange={handleSliderChange}
+          value={position / duration} // Proporção entre posição e duração
+          onSlidingComplete={handleSliderChange}
           minimumTrackTintColor={'dodgerblue'}
           maximumTrackTintColor="#8E97A6"
           thumbTintColor="#3D425C"
@@ -88,7 +102,7 @@ const PlayerScreen = ({ route, navigation }) => {
       </View>
       <View style={styles.centeredView}>
         <TouchableOpacity style={styles.playButtonContainer} onPress={handlePlayPause}>
-          <Icon name={playing ? "pause" : "play"} size={50} color="#3D425C" />
+        <Icon name={playing ? "pause" : "play"} size={50} color="#3D425C" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

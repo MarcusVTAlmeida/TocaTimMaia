@@ -1,60 +1,51 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, Text, View } from 'react-native';
-import * as Linking from 'expo-linking';
+import { SafeAreaView, StyleSheet, ScrollView, Text, View, Linking } from 'react-native'; // Alteração na importação
 import { SocialIcon, Icon } from 'react-native-elements';
-import Admob from '../../admob'
+import Admob from '../../admob';
 
 const App = () => {
-  function linkingYoutube() {
-    Linking.openURL('https://www.youtube.com/channel/UCQm7LSEuBoLHVIjWnDctW2Q');
+  // Funções de redirecionamento usando Linking do react-native
+  const linkingYoutube = () => {
+    Linking.openURL('https://www.youtube.com/@CazuzaOficial');
   };
-  function linkingFacebook() {
-    Linking.openURL('https://www.facebook.com/TimMaiaOfficial');
+  const linkingFacebook = () => {
+    Linking.openURL('https://www.facebook.com/CazuzaOficial/?locale=pt_BR');
   };
-  function linkingInstagram() {
-    Linking.openURL('https://www.instagram.com/timmaia.oficial');
+  const linkingInstagram = () => {
+    Linking.openURL('https://www.instagram.com/cazuza.oficial');
   };
-  function linkingSpotify() {
-    Linking.openURL('https://open.spotify.com/intl-pt/artist/0jOs0wnXCu1bGGP7kh5uIu?si=vYfGBUHgR16EKS6-Je6mUw');
+  const linkingSpotify = () => {
+    Linking.openURL('https://open.spotify.com/intl-pt/artist/1PwOU6fFbmaGkK3wkbb8fU?nd=1&dlsi=7b21fcf3b5a44c14');
   };
-  function linkingTwitter() {
-    Linking.openURL('https://x.com/OficialTimMaia');
+  const linkingTwitter = () => {
+    Linking.openURL('https://twitter.com/cazuzaoficial');
   };
-  function linkingEmail() {
-    Linking.openURL('mailto:carmelo@timmaia.com.br');
+  const linkingEmail = () => {
+    Linking.openURL('mailto:cazuzadigital@gmail.com');
   };
-  function linkingAmazonMusic() {
-    Linking.openURL('https://music.amazon.com.br/artists/B000QJNPWU/tim-maia');
+  const linkingAmazonMusic = () => {
+    Linking.openURL('https://music.amazon.com.br/artists/B000TOMOVA/cazuza?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=BR&ref=dm_sh_mfYCmULkqx2nPCAhjw3n53GNJ');
   };
-  function linkingWeb() {
-    Linking.openURL('http://www.timmaia.com.br/');
+  const linkingWeb = () => {
+    Linking.openURL('https://music.amazon.com.br/artists/B000TOMOVA/cazuza?marketplaceId=ART4WZ8MWBX2Y&musicTerritory=BR&ref=dm_sh_mfYCmULkqx2nPCAhjw3n53GNJ');
   };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
-      <View style={{ alignItems: 'center', alignSelf: 'center' }}>
-      </View>
+      <View style={{ alignItems: 'center', alignSelf: 'center' }}></View>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.heading} >
-            Redes sociais oficiais
-          </Text>
-          <Text style={styles.textStyle}>TOCA TIM MAIA</Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}>
-          </View>
+          <Text style={styles.heading}>Redes sociais oficiais</Text>
+          <Text style={styles.textStyle}>TOCA CAZUZA</Text>
+          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}></View>
+          
           <View style={{ width: '100%', flexDirection: 'column' }}>
             <SocialIcon
               title="Siga no Youtube"
               button
               iconSize={40}
               type="youtube"
-              onPress={() => {
-                linkingYoutube()
-              }}
+              onPress={linkingYoutube}
             />
           </View>
           <View style={{ width: '100%', flexDirection: 'column' }}>
@@ -63,9 +54,7 @@ const App = () => {
               button
               iconSize={40}
               type="facebook"
-              onPress={() => {
-                linkingFacebook()
-              }}
+              onPress={linkingFacebook}
             />
           </View>
           <View style={{ width: '100%', flexDirection: 'column' }}>
@@ -74,9 +63,7 @@ const App = () => {
               button
               iconSize={40}
               type="instagram"
-              onPress={() => {
-                linkingInstagram()
-              }}
+              onPress={linkingInstagram}
             />
           </View>
           <View style={{ width: '100%', flexDirection: 'column' }}>
@@ -85,9 +72,7 @@ const App = () => {
               button
               iconSize={40}
               type="twitter"
-              onPress={() => {
-                linkingTwitter()
-              }}
+              onPress={linkingTwitter}
             />
           </View>
           <View style={{ width: '100%', flexDirection: 'row' }}>
@@ -98,7 +83,7 @@ const App = () => {
               raised
               color='green'
               size={37}
-              onPress={() => linkingSpotify()} />
+              onPress={linkingSpotify} />
             <Icon
               name='envelope'
               type='font-awesome'
@@ -106,7 +91,7 @@ const App = () => {
               raised
               color='#A9A9A9'
               size={37}
-              onPress={() => linkingEmail()} />
+              onPress={linkingEmail} />
             <Icon
               name='amazon'
               type='font-awesome'
@@ -114,14 +99,14 @@ const App = () => {
               raised
               color='#363636'
               size={37}
-              onPress={() => linkingAmazonMusic()} />
+              onPress={linkingAmazonMusic} />
             <Icon
               name='web'
               type='material-community'
               raised
               color='black'
               size={37}
-              onPress={() => linkingWeb()} />
+              onPress={linkingWeb} />
           </View>
         </View>
       </ScrollView>
@@ -129,6 +114,7 @@ const App = () => {
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
