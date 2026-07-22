@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Mural: leitura pública, escrita por usuários autenticados
+    match /mural/{postId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.resource.data.uid == request.auth.uid;
+    }
+
+    // Usuários: leitura pública, escrita apenas pelo próprio dono
+    match /users/{uid} {
+      allow read: if true;
+      allow create, update: if request.auth != null && request.auth.uid == uid;
+      allow delete: if false;
+    }
+
+    // Eventos: leitura pública, criação/atualização por usuários autenticados
+    match /eventos/{eventoId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && resource.data.criadorId == request.auth.uid;
+    }
+
+    // Notificações: leitura pelo próprio usuário, criação por qualquer autenticado
+    match /notificacoes/{notifId} {
+      allow read: if request.auth != null && resource.data.usuarioId == request.auth.uid;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && resource.data.usuarioId == request.auth.uid;
+      allow delete: if false;
+    }
+
+    // Ranking: leitura pública
+    match /ranking/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

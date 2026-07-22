@@ -1,0 +1,16 @@
+{
+  "name": "tocatimmaia-functions",
+  "description": "Cloud Functions for Toca Tim Maia",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0",
+    "firebase-functions": "^6.0.0"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "private": true
+}

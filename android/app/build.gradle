@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -77,39 +78,52 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.tocatimmaia"
+    lint {
+        disable 'Instantiatable'
+    }
+
+    namespace "com.queniabr.TocaTimMaia"
     defaultConfig {
-        applicationId "com.tocatimmaia"
+        applicationId "com.queniabr.TocaTimMaia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
-        release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-        }
-    }
+       debug {
+           storeFile file('debug.keystore')
+           storePassword 'android'
+           keyAlias 'androiddebugkey'
+           keyPassword 'android'
+       }
+       release {
+           storeFile file('meu-keystore.jks')
+           storePassword "Vinicius123456@"
+           keyAlias "meu-alias"
+           keyPassword "Vinicius123456@"
+       }
+   }
+   buildTypes {
+       debug {
+           signingConfig signingConfigs.debug
+       }
+       release {
+           signingConfig signingConfigs.release
+           minifyEnabled false
+           proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+       }
+   }
 }
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+
+    implementation platform('com.google.firebase:firebase-bom:34.0.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-messaging'
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -117,3 +131,15 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xskip-metadata-version-check")
+    }
+}
+
+project.ext.vectoricons = [
+    iconFontNames: ['MaterialCommunityIcons.ttf', 'AnotherFont.ttf', 'AntDesign.ttf', 'Entypo.ttf', 'EvilIcons.ttf', 'Feather.ttf', 'FontAwesome.ttf', 'FontAwesome5.ttf', 'FontAwesome5Brands.ttf', 'FontAwesome6.ttf', 'FontAwesome6Brands.ttf', 'Fontisto.ttf', 'Foundation.ttf', 'Ionicons.ttf', 'Lucide.ttf', 'MaterialDesignIcons.ttf', 'MaterialIcons.ttf', 'Octicons.ttf', 'SimpleLineIcons.ttf', 'Zocial.ttf']
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
